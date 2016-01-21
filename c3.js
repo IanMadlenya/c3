@@ -2601,10 +2601,8 @@
                 // Show cursor as pointer if point is close to mouse position
                 if ($$.isBarType(closest.id) || $$.dist(closest, mouse) < config.point_sensitivity) {
                     $$.svg.select('.' + CLASS.eventRect).style('cursor', 'pointer');
-                    if (!$$.mouseover) {
-                        config.data_onmouseover.call($$.api, closest);
-                        $$.mouseover = closest;
-                    }
+                    config.data_onmouseover.call($$.api, closest);
+                    $$.mouseover = closest;
                 }
             })
             .on('click', function () {
@@ -3342,6 +3340,9 @@
         };
     };
     c3_chart_internal_fn.isWithinBar = function (that) {
+        if (that.pathSegList.numberOfItems < 2) {
+            return false;
+        }
         var mouse = this.d3.mouse(that), box = that.getBoundingClientRect(),
             seg0 = that.pathSegList.getItem(0), seg1 = that.pathSegList.getItem(1),
             x = Math.min(seg0.x, seg1.x), y = Math.min(seg0.y, seg1.y),
@@ -6038,6 +6039,9 @@
             return found;
         },
         getPathBox = c3_chart_internal_fn.getPathBox = function (path) {
+            if (path.pathSegList.numberOfItems < 2) {
+            	return {x: 0, y: 0, width: 0, height: 0};
+            }
             var box = path.getBoundingClientRect(),
                 items = [path.pathSegList.getItem(0), path.pathSegList.getItem(1)],
                 minX = items[0].x, minY = Math.min(items[0].y, items[1].y);
