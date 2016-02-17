@@ -5323,11 +5323,11 @@
                     // line/area selection not supported yet
                     return;
                 }
-                if (isWithin ^ isIncluded) {
-                    shape.classed(CLASS.INCLUDED, !isIncluded);
-                    // TODO: included/unincluded callback here
-                    shape.classed(CLASS.SELECTED, !isSelected);
-                    toggle.call($$, !isSelected, shape, d, i);
+                if (isWithin ^ isSelected || isWithin ^ isIncluded) {
+                	shape.classed(CLASS.INCLUDED, isWithin);
+                	// TODO: included/unincluded callback here
+                	shape.classed(CLASS.SELECTED, isWithin);
+                	toggle.call($$, isWithin, shape, d, i);
                 }
             });
     };
@@ -7282,6 +7282,8 @@
         return ua.indexOf('Chrome') >= 0;
     };
 
+    /* jshint ignore:start */
+
     // PhantomJS doesn't have support for Function.prototype.bind, which has caused confusion. Use
     // this polyfill to avoid the confusion.
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Polyfill
@@ -8120,6 +8122,8 @@
          }
      }
     }());
+
+    /* jshint ignore:end */
 
     if (typeof define === 'function' && define.amd) {
         define("c3", ["d3"], function () { return c3; });
