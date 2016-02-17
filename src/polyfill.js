@@ -1,3 +1,5 @@
+/* jshint ignore:start */
+
 // PhantomJS doesn't have support for Function.prototype.bind, which has caused confusion. Use
 // this polyfill to avoid the confusion.
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Polyfill
@@ -836,3 +838,5 @@ if (!Function.prototype.bind) {
      }
  }
 }());
+
+/* jshint ignore:end */
