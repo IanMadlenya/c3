@@ -1085,6 +1085,7 @@
             zoom_onzoomend: function () {},
             zoom_x_min: undefined,
             zoom_x_max: undefined,
+            interaction_brighten: true,
             interaction_enabled: true,
             onmouseover: function () {},
             onmouseout: function () {},
@@ -5324,10 +5325,10 @@
                     return;
                 }
                 if (isWithin ^ isSelected || isWithin ^ isIncluded) {
-                	shape.classed(CLASS.INCLUDED, isWithin);
-                	// TODO: included/unincluded callback here
-                	shape.classed(CLASS.SELECTED, isWithin);
-                	toggle.call($$, isWithin, shape, d, i);
+                    shape.classed(CLASS.INCLUDED, isWithin);
+                    // TODO: included/unincluded callback here
+                    shape.classed(CLASS.SELECTED, isWithin);
+                    toggle.call($$, isWithin, shape, d, i);
                 }
             });
     };
@@ -5388,14 +5389,18 @@
     c3_chart_internal_fn.selectPath = function (target, d) {
         var $$ = this;
         $$.config.data_onselected.call($$, d, target.node());
-        target.transition().duration(100)
-            .style("fill", function () { return $$.d3.rgb($$.color(d)).brighter(0.75); });
+        if ($$.config.interaction_brighten) {
+            target.transition().duration(100)
+                .style("fill", function () { return $$.d3.rgb($$.color(d)).brighter(0.75); });
+        }
     };
     c3_chart_internal_fn.unselectPath = function (target, d) {
         var $$ = this;
         $$.config.data_onunselected.call($$, d, target.node());
-        target.transition().duration(100)
-            .style("fill", function () { return $$.color(d); });
+        if ($$.config.interaction_brighten) {
+            target.transition().duration(100)
+                .style("fill", function () { return $$.color(d); });
+        }
     };
     c3_chart_internal_fn.togglePath = function (selected, target, d, i) {
         selected ? this.selectPath(target, d, i) : this.unselectPath(target, d, i);
