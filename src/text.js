@@ -90,7 +90,7 @@ c3_chart_internal_fn.getXForText = function (points, d, textElement) {
             xPos = 4;
         }
     }
-    return xPos;
+    return isNaN(xPos) ? 0:xPos;
 };
 c3_chart_internal_fn.getYForText = function (points, d, textElement) {
     var $$ = this,
@@ -120,5 +120,5 @@ c3_chart_internal_fn.getYForText = function (points, d, textElement) {
             yPos = this.height - 4;
         }
     }
-    return yPos;
+    return isNaN(yPos) ? 0:yPos;
 };

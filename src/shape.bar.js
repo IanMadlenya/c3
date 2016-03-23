@@ -77,11 +77,14 @@ c3_chart_internal_fn.generateDrawBar = function (barIndices, isSub) {
         var indexX = config.axis_rotated ? 1 : 0;
         var indexY = config.axis_rotated ? 0 : 1;
 
-        var path = 'M ' + points[0][indexX] + ',' + points[0][indexY] + ' ' +
-                'L' + points[1][indexX] + ',' + points[1][indexY] + ' ' +
-                'L' + points[2][indexX] + ',' + points[2][indexY] + ' ' +
-                'L' + points[3][indexX] + ',' + points[3][indexY] + ' ' +
-                'z';
+        var path = 'M ' + (isNaN(points[0][indexX]) ? 0:points[0][indexX]) + ','+
+            (isNaN(points[0][indexY]) ? 0:points[0][indexY]) + ' ' + 'L' +
+            (isNaN(points[1][indexX]) ? 0:points[1][indexX]) + ',' +
+            (isNaN(points[1][indexY]) ? 0:points[1][indexY]) + ' ' + 'L' +
+            (isNaN(points[2][indexX]) ? 0:points[2][indexX]) + ',' +
+            (isNaN(points[2][indexY]) ? 0:points[2][indexY]) + ' ' +'L' +
+            (isNaN(points[3][indexX]) ? 0:points[3][indexX]) + ',' +
+            (isNaN(points[3][indexY]) ? 0:points[3][indexY]) + ' ' +'z';
 
         return path;
     };
