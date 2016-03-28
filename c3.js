@@ -6970,7 +6970,7 @@
         }
         function axisY(selection, y) {
             selection.attr("transform", function (d) {
-                return "translate(0," + Math.ceil(y(d)) + ")";
+                return "translate(0," + Math.ceil(isNaN(y(d))? 0:y(d)) + ")";
             });
         }
         function scaleExtent(domain) {
