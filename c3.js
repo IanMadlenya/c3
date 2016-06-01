@@ -4904,7 +4904,7 @@
             interval = window.setInterval(function () {
                 if (!$$.transiting) {
                     window.clearInterval(interval);
-                    if ($$.legend.selectAll('.c3-legend-item-focused').size() > 0) {
+                    if ($$.legend && $$.legend.selectAll('.c3-legend-item-focused').size() > 0) {
                         $$.expandArc(targetIds);
                     }
                 }
